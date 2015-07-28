@@ -1,0 +1,21 @@
+{
+  "name": "simpleServer",
+  "version": "0.0.1",
+  "homepage": "https://github.com/VitaliiBorodii/simpleServer",
+  "description": "simple Node.js server",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "latest",
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "pure": "latest"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
