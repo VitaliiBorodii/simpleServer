@@ -1,0 +1,10 @@
+{
+  "port" : 1337,
+  "secret" : "some secret",
+  "mongo": {
+    "host": "localhost",
+    "db": "mean-dev",
+    "port": 27017,
+    "uri": "mongodb://localhost/mean-dev"
+  }
+}
