@@ -5,16 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
+
 var config = require('./libs/config');
 var db = require('./libs/mongo');
-
-var session = require('./libs/session');
-
+var auth = require('./libs/auth');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,12 +29,24 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session);
+app.use(session({
+  cookie: config.get('session:cookie'),
+  key: config.get('session:name'),
+  secret: config.get('session:secret'),
+  store: new MongoDBStore({
+    uri: config.get('mongo:uri')
+  }),
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(auth);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,13 @@
 {
   "port" : 1337,
-  "secret" : "some secret",
+  "session": {
+    "secret" : "some secret",
+    "key": "user",
+    "cookie": {
+      "maxAge": 60000,
+      "httpOnly": true
+    }
+  },
   "mongo": {
     "host": "localhost",
     "db": "mean-dev",
