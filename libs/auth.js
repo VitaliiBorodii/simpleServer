@@ -1,14 +1,16 @@
 var User = require('../models/user');
 
 module.exports = function (req, res, next) {
-    if (req.session.user) {
-        User.findById(req.session,user, function (err, user) {
+    if (req.session.userId) {
+        User.findById(req.session.userId, function (err, user) {
             if (err) return next(err);
-            debugger
-            res.render('user', {name: user.getValue('username')})
-        })
+            if (user) {
+                next();
+            } else {
+                res.redirect('login');
+            }
+        });
     } else {
-        res.render('login');
+        res.redirect('/login');
     }
-    next();
 };

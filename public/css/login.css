@@ -1,0 +1,7 @@
+fieldset {
+    text-align: center;
+    margin: auto;
+}
+fieldset > label > input {
+    margin: 10px;
+}

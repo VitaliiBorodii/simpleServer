@@ -2,6 +2,15 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='bower_components/pure/pure.css')
+    link(rel='stylesheet', href='css/style.css')
   body
+    .page-header
+      ul
+        li
+          a(class="pure-button pure-button-primary" href="/") Main
+        li
+          a(class="pure-button pure-button-primary" href="users") My Page
+        li
+          a(class="pure-button pure-button-primary" href="login") Log in
     block content

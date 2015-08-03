@@ -14,6 +14,8 @@ var auth = require('./libs/auth');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
+var todos = require('./routes/todos');
 
 var app = express();
 
@@ -40,13 +42,17 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(auth);
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/login', login);
+app.use('/logout', logout);
+app.use(express.static('public'));
 
+app.use(auth);
+app.use('/users', users);
+
+// REST API
+app.use('/todos', todos);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,6 +85,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 app.listen(config.get('port'));
 

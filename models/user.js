@@ -5,47 +5,49 @@ var SALT_WORK_FACTOR = 10;
 
 var Schema = new mongoose.Schema({
     username: {
+        type: String
+    },
+    email: {
         type: String,
         unique: true,
         required: true
     },
-    password: {
+    hashedPassword: {
         type: String,
         required: true
     },
-    created: {
+    salt: {
+        type: String
+    },
+    createdDate: {
         type: Date,
         default: Date.now
     }
 });
 
+
 Schema.pre('save', function(next) {
     var user = this;
-
     // only hash the password if it has been modified (or is new)
-    if (!user.isModified('password')) return next();
+    if (!user.isModified('hashedPassword')) return next();
 
     // generate a salt
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next(err);
-
+        user.salt = salt;
         // hash the password using our new salt
-        bcrypt.hash(user.password, salt, function(err, hash) {
+        bcrypt.hash(user.hashedPassword, salt, function(err, hash) {
             if (err) return next(err);
 
             // override the cleartext password with the hashed one
-            user.password = hash;
-            if (!user.username) {
-                var name = user.email.split('@')[0];
-                user.username = name.replace(name[0], name[0].toUpperCase());
-            }
+            user.hashedPassword = hash;
             next();
         });
     });
 });
 
 Schema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    bcrypt.compare(candidatePassword, this.hashedPassword, function(err, isMatch) {
         if (err) return cb(err);
         cb(null, isMatch);
     });

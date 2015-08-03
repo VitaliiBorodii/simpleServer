@@ -1,5 +1,4 @@
-html
-  head
-    title!= name
-  body
-    h1!= name
+extends layout
+block content
+  h1!= "Hello " +  name +  ' !'
+  script(src="js/user.js")

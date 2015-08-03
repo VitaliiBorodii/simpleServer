@@ -8,11 +8,11 @@ router.get('/', function (req, res, next) {
     res.render('login');
 });
 router.post('/', function(req, res, next) {
-    var username = req.body.username,
+    var email = req.body.email,
         password = req.body.password;
     async.waterfall([
         function(callback) {
-            User.findOne({username : username}, callback)
+            User.findOne({email : email}, callback)
         },
         function (user, callback) {
             if (user) {
@@ -28,10 +28,10 @@ router.post('/', function(req, res, next) {
             if (user) {
                 isMatch ? callback(null, user) : callback({
                     status: 403,
-                    message: '<h2>Incorrect password!</h2>'
+                    message: 'Incorrect password!'
                 });
             } else {
-                user = new User({username: username, password: password});
+                user = new User({email: email, hashedPassword: password});
                 user.save(function (err) {
                     if (err) return next(err);
                     callback(null, user);
@@ -41,8 +41,11 @@ router.post('/', function(req, res, next) {
     ],
         function (err, user) {
             if (err) return next(err);
-            req.session.user = user.getValue('_id');
-            res.render('user', {name: user.getValue('username')})
+            req.session.userId = user.get('_id');
+            if (!req.body.remember) {
+                req.session.cookie.maxAge = null
+            }
+            res.redirect('users');
         });
 });
 
