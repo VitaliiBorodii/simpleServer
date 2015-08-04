@@ -1,0 +1,15 @@
+.pure-table td .fa-lg:hover {
+    cursor: pointer
+}
+
+.pure-table td .fa-check-circle-o {
+    color: gray
+}
+
+.pure-table td .fa-check:hover {
+    color: green
+}
+
+.pure-table td .fa-times-circle-o:hover {
+    color: red
+}

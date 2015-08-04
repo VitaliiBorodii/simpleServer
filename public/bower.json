@@ -1,0 +1,21 @@
+{
+  "name": "ui-for-simple-server",
+  "version": "0.0.1",
+  "homepage": "https://github.com/VitaliiBorodii/simpleServer",
+  "authors": [
+    "vitalii"
+  ],
+  "description": "ui-libraries",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "*",
+    "pure": "*"
+  }
+}

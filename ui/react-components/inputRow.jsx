@@ -3,16 +3,22 @@ var React = require('react');
 module.exports = React.createClass({
     // displayName: 'inputRow',
     addItem: function (e, id) {
-        var itemName = this.getDOMNode().getElementsByTagName('input')[0].value;
+        e.preventDefault();
+        var input = this.getDOMNode().getElementsByTagName('input')[0];
+        var itemName = input.value;
         if (itemName) {
             this.props.handleAdd(itemName);
+            input.value = '';
         }
     },
     render: function () {
-        return (<tr className="pure-form">
-            <td><input className="pure-input-1" type="text" placeholder="New Item..."/></td>
-            <td><input className="pure-button pure-button-primary" type="button" onClick={this.addItem}
-                       value="Add item"/></td>
+        return (<tr>
+            <td colSpan="2">
+                <form className="pure-form" onSubmit={this.addItem}>
+                    <input style={{marginRight: "10px;"}} type="text" placeholder="New Item..."/>
+                    <input className="pure-button pure-button-primary" type="submit" value="Add item"/>
+                </form>
+            </td>
         </tr>)
     }
 });

@@ -28,6 +28,31 @@ module.exports = React.createClass({
         }.bind(this);
         xhr.send(null);
     },
+    markDone: function (id) {
+        var data = {
+            done: true
+        };
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', '/todos/' + id, true);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                this.componentDidMount();
+            }
+        }.bind(this);
+        xhr.send(JSON.stringify(data));
+    },
+    makeDelete: function (id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/todos/' + id, true);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                this.componentDidMount();
+            }
+        }.bind(this);
+        xhr.send(null);
+    },
     addItem: function (item) {
         var data = {
             name: item
@@ -40,15 +65,12 @@ module.exports = React.createClass({
                 this.componentDidMount();
             }
         }.bind(this);
-        var old = this.state.items;
-        old.push(data);
-        this.setState({items: old});
         xhr.send(JSON.stringify(data));
     },
     render: function () {
         var rows = [];
         this.state.items.forEach(function (item) {
-            rows.push(<ItemRow item={item} key={item.id}/>);
+            rows.push(<ItemRow makeDone={this.markDone} deleteItem={this.makeDelete} item={item} key={item.id}/>);
         }.bind(this));
         return (
             <table className="pure-table pure-table-bordered">
