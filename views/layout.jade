@@ -10,12 +10,13 @@ html
       ul
         li
           a(class="pure-button pure-button-primary" href="/") Main
-        li
-          a(class="pure-button pure-button-primary" href="users") My Page
-        li
-          if logged == true
+        if logged == true
+          li
+            a(class="pure-button pure-button-primary" href="users") My Page
+          li
             form(method='POST', action="logout")
               button( type="submit" class="pure-button pure-button-primary") Log Out
-          else
+        else
+          li
             a(class="pure-button pure-button-primary" href="login") Log in
     block content

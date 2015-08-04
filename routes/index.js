@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
         logged = true;
     }
     res.render('index', {title: 'Express', logged: logged});
-    next();
 });
 
 module.exports = router;
