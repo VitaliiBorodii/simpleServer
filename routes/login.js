@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
             if (err) return next(err);
             req.session.userId = user.get('_id');
             if (!req.body.remember) {
-                req.session.cookie.maxAge = null
+                req.session.cookie.expires = false;
             }
             res.redirect('users');
         });

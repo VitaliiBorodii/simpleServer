@@ -19,3 +19,7 @@ ul > li {
 .page-header {
   text-align: center;
 }
+
+#content table {
+  margin: auto;
+}

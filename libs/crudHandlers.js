@@ -5,7 +5,7 @@ module.exports = function (modelName) {
     // List of documents
     var list = function (req, res, next) {
         var userId = req.session.userId;
-        Model.find({}, function (err, data) {
+        Model.find({userId: userId}, function (err, data) {
             if (err) next(err);
             res.send(data);
         });

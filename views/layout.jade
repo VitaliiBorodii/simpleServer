@@ -12,5 +12,9 @@ html
         li
           a(class="pure-button pure-button-primary" href="users") My Page
         li
-          a(class="pure-button pure-button-primary" href="login") Log in
+          if logged == true
+            form(method='POST', action="logout")
+              button( type="submit" class="pure-button pure-button-primary") Log Out
+          else
+            a(class="pure-button pure-button-primary" href="login") Log in
     block content

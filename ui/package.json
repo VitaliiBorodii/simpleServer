@@ -1,0 +1,16 @@
+{
+  "name": "simple-server-ui",
+  "version": "0.0.1",
+  "description": "ui for simple-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vitalii",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "latest",
+    "react": "latest",
+    "jsx-loader": "latest"
+  }
+}

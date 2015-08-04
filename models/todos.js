@@ -13,6 +13,10 @@ var Schema = new mongoose.Schema({
     createdDate: {
         type: Date,
         default: Date.now
+    },
+    done: {
+        type: Boolean,
+        default: false
     }
 });
 
