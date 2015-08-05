@@ -10,15 +10,21 @@ module.exports = React.createClass({
         var id = this.props.item._id;
         this.props.deleteItem(id);
     },
-    //displayName: 'itemRow',
     render: function () {
-        var item = this.props.item;
-        var name = item.name;
-        var itemDone = item.done ? 'fa fa-lg fa-check-circle-o' : 'fa fa-lg fa-check';
-        return (<tr>
+        var item = this.props.item,
+            name = item.name,
+            label = 'fa fa-lg ',
+            className;
+        if (item.done) {
+            className = 'item-done';
+            label += 'fa-check-circle-o';
+        } else {
+            label += 'fa-check';
+        }
+        return (<tr className={className}>
             <td>{name}</td>
-            <td><i onClick={this.makeDone} className={itemDone}></i> <i onClick={this.deleteItem}
-                                                                        className="fa fa-lg fa-times-circle-o"></i></td>
+            <td><i onClick={this.makeDone} className={label}></i> <i onClick={this.deleteItem}
+                                                                     className="fa fa-lg fa-times"></i></td>
         </tr>)
     }
 });

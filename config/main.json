@@ -4,7 +4,7 @@
     "secret" : "some secret",
     "key": "user",
     "cookie": {
-      "maxAge": 600000,
+      "maxAge": 604800000,
       "httpOnly": true
     }
   },

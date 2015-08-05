@@ -1,7 +1,23 @@
 fieldset {
     text-align: center;
-    margin: auto;
 }
 fieldset > label > input {
     margin: 10px;
+}
+
+.login-form {
+    display: flex;
+    margin-top: 10%;
+}
+
+form {
+    margin: auto;
+}
+
+.pure-controls span {
+    padding-left: 10px;
+}
+
+.pure-controls button {
+    width: 100%
 }

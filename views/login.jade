@@ -1,13 +1,22 @@
-extends layout
-block content
-   link(rel='stylesheet', href='css/login.css')
-   form(class='pure-form' method='POST', action='/login')
-     fieldset
-           label(for="email") Email
-            input(id="email" name="email" type="email" placeholder="Email")
-           label(for="password") Password
-            input(id="password" name="password" type="password" placeholder="Password" required)
-           label(for="remember") Remember me
-            input(id="remember" name="remember" type="checkbox")
-           button(class="pure-button pure-button-primary") Submit
-
+doctype html
+html
+    head
+        title Log In
+        link(rel='stylesheet', href='bower_components/pure/pure.css')
+        link(rel='stylesheet', href='css/login.css')
+    body
+        .login-form
+            form(class='pure-form pure-form-aligned' method='POST', action='/login')
+                fieldset
+                    .pure-control-group
+                        label(for="email") Email
+                        input(id="email" name="email" type="email" placeholder="Email")
+                    .pure-control-group
+                        label(for="password") Password
+                        input(id="password" name="password" type="password" placeholder="Password" required)
+                    .pure-controls
+                        label(for="remember" class="pure-checkbox")
+                            input(id="remember" name="remember" type="checkbox")
+                            span Remember me
+                    .pure-controls
+                        button(class="pure-button pure-button-primary") Submit

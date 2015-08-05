@@ -7,10 +7,13 @@ module.exports = function (req, res, next) {
             if (user) {
                 next();
             } else {
-                res.redirect('login');
+                res.redirect('/');
             }
         });
     } else {
-        res.redirect('/login');
+        next({
+            status: 401,
+            message: 'Need Authorization'
+        });
     }
 };

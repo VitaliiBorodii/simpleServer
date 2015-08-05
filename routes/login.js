@@ -42,10 +42,11 @@ router.post('/', function(req, res, next) {
         function (err, user) {
             if (err) return next(err);
             req.session.userId = user.get('_id');
+            req.session.userName = user.get('username') || user.get('email');
             if (!req.body.remember) {
                 req.session.cookie.expires = false;
             }
-            res.redirect('users');
+            res.redirect('/');
         });
 });
 

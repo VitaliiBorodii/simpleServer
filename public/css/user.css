@@ -10,6 +10,14 @@
     color: green
 }
 
-.pure-table td .fa-times-circle-o:hover {
+.item-done {
+    color: gray;
+}
+
+.item-done > td:first-child {
+    text-decoration: line-through;
+}
+
+.pure-table td .fa-times:hover {
     color: red
 }

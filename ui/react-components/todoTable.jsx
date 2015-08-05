@@ -70,7 +70,7 @@ module.exports = React.createClass({
     render: function () {
         var rows = [];
         this.state.items.forEach(function (item) {
-            rows.push(<ItemRow makeDone={this.markDone} deleteItem={this.makeDelete} item={item} key={item.id}/>);
+            rows.push(<ItemRow makeDone={this.markDone} deleteItem={this.makeDelete} item={item} key={item._id}/>);
         }.bind(this));
         return (
             <table className="pure-table pure-table-bordered">
