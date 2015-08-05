@@ -4,11 +4,11 @@ module.exports = React.createClass({
     makeDone: function () {
         if (this.props.item.done) return;
         var id = this.props.item._id;
-        this.props.makeDone(id);
+        this.props.handleDone(id);
     },
     deleteItem: function () {
         var id = this.props.item._id;
-        this.props.deleteItem(id);
+        this.props.handleDelete(id);
     },
     render: function () {
         var item = this.props.item,

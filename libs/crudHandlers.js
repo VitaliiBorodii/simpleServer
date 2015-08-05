@@ -5,8 +5,14 @@ module.exports = function (modelName) {
     // List of documents
     var list = function (req, res, next) {
         var userId = req.session.userId;
+        if (!userId) {
+            return next({
+                status: 401,
+                message: 'Need Authorization'
+            });
+        }
         Model.find({userId: userId}, function (err, data) {
-            if (err) next(err);
+            if (err) return next(err);
             res.send(data);
         });
     };
@@ -14,11 +20,17 @@ module.exports = function (modelName) {
     // One document
     var get = function (req, res, next) {
         var userId = req.session.userId;
+        if (!userId) {
+            return next({
+                status: 401,
+                message: 'Need Authorization'
+            });
+        }
         try{var id = mongoose.Types.ObjectId(req.params.id)}
         catch (e){res.send(400)}
 
         Model.find({_id: id, userId: userId}, function (err, data) {
-            if (err) next(err);
+            if (err) return next(err);
             if (data) {
                 res.send(data);
             } else {
@@ -30,6 +42,12 @@ module.exports = function (modelName) {
     // Create a document
     var create = function (req, res, next) {
         var userId = req.session.userId;
+        if (!userId) {
+            return next({
+                status: 401,
+                message: 'Need Authorization'
+            });
+        }
         var data = req.body;
         data.userId = userId;
         Model.create(data, function (err, data) {
@@ -43,11 +61,17 @@ module.exports = function (modelName) {
     // Update document
     var update = function (req, res, next) {
         var userId = req.session.userId;
+        if (!userId) {
+            return next({
+                status: 401,
+                message: 'Need Authorization'
+            });
+        }
         try{var id = mongoose.Types.ObjectId(req.params.id)}
         catch (e){res.send(400)}
 
         Model.update({_id: id, userId: userId}, {$set: req.body}, function (err, numberAffected, data) {
-            if (err) next(err);
+            if (err) return next(err);
 
             if (numberAffected) {
                 res.send(200);
@@ -61,11 +85,17 @@ module.exports = function (modelName) {
     // Delete document
     var remove = function (req, res, next) {
         var userId = req.session.userId;
+        if (!userId) {
+            return next({
+                status: 401,
+                message: 'Need Authorization'
+            });
+        }
         try{var id = mongoose.Types.ObjectId(req.params.id)}
         catch (e){res.send(400)}
 
         Model.remove({_id: id, userId: userId}, function (err, data) {
-            if (err) next(err);
+            if (err) return next(err);
             res.send(data ? req.params.id : 404);
         });
     };

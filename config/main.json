@@ -1,7 +1,7 @@
 {
   "port" : 1337,
   "session": {
-    "secret" : "some secret",
+    "secret": "random Secret",
     "key": "user",
     "cookie": {
       "maxAge": 604800000,

@@ -1,5 +1,6 @@
 'use strict'
 var React = require('react');
+var _ = require('lodash');
 var ItemRow = require('./itemRow');
 var InputRow = require('./inputRow');
 module.exports = React.createClass({
@@ -69,8 +70,8 @@ module.exports = React.createClass({
     },
     render: function () {
         var rows = [];
-        this.state.items.forEach(function (item) {
-            rows.push(<ItemRow makeDone={this.markDone} deleteItem={this.makeDelete} item={item} key={item._id}/>);
+        _.forEach(this.state.items, function (item) {
+            rows.push(<ItemRow handleDone={this.markDone} handleDelete={this.makeDelete} item={item} key={item._id}/>);
         }.bind(this));
         return (
             <table className="pure-table pure-table-bordered">
