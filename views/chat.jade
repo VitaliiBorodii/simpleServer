@@ -1,0 +1,7 @@
+extends layout
+block content
+    script(src="http://localhost:1337/socket.io/socket.io.js")
+    link(rel='stylesheet', href='build/chat.css')
+    h1 This is Chat page
+    div#chat-content
+    script(src="build/chat.js")

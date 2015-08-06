@@ -71,7 +71,7 @@ module.exports = React.createClass({
     render: function () {
         var rows = [];
         _.forEach(this.state.items, function (item) {
-            rows.push(<ItemRow handleDone={this.markDone} handleDelete={this.makeDelete} item={item} key={item._id}/>);
+            rows.push(<ItemRow handleEdit={this.markDone} handleDelete={this.makeDelete} item={item} key={item._id}/>);
         }.bind(this));
         return (
             <table className="pure-table pure-table-bordered">
@@ -79,6 +79,11 @@ module.exports = React.createClass({
                 <InputRow handleAdd={this.addItem}/>
                 </thead>
                 <tbody>
+                <tr>
+                    <td>Item Name</td>
+                    <td>Status</td>
+                    <td>Delete</td>
+                </tr>
                 {rows}
                 </tbody>
             </table>

@@ -1,4 +1,4 @@
-.pure-table td .fa-lg:hover {
+.pure-table td span:hover {
     cursor: pointer
 }
 
@@ -20,4 +20,8 @@
 
 .pure-table td .fa-times:hover {
     color: red
+}
+
+.pure-table tbody tr:first-child {
+    font-weight: bold;
 }

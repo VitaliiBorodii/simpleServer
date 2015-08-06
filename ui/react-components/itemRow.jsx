@@ -4,7 +4,7 @@ module.exports = React.createClass({
     makeDone: function () {
         if (this.props.item.done) return;
         var id = this.props.item._id;
-        this.props.handleDone(id);
+        this.props.handleEdit(id);
     },
     deleteItem: function () {
         var id = this.props.item._id;
@@ -13,18 +13,21 @@ module.exports = React.createClass({
     render: function () {
         var item = this.props.item,
             name = item.name,
-            label = 'fa fa-lg ',
-            className;
+            iconCls = 'fa fa-lg ',
+            className,
+            label;
         if (item.done) {
             className = 'item-done';
-            label += 'fa-check-circle-o';
+            iconCls += 'fa-check-circle-o';
+            label = '(Done)';
         } else {
-            label += 'fa-check';
+            iconCls += 'fa-check';
+            label = '(Undone)';
         }
         return (<tr className={className}>
             <td>{name}</td>
-            <td><i onClick={this.makeDone} className={label}></i> <i onClick={this.deleteItem}
-                                                                     className="fa fa-lg fa-times"></i></td>
+            <td onClick={this.makeDone}><span><i className={iconCls}></i></span></td>
+            <td onClick={this.deleteItem}><span><i className="fa fa-lg fa-times"></i></span></td>
         </tr>)
     }
 });

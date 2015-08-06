@@ -2,9 +2,8 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='bower_components/pure/pure.css')
-    link(rel='stylesheet', href='bower_components/font-awesome/css/font-awesome.css')
-    link(rel='stylesheet', href='css/style.css')
+    link(rel='stylesheet', href='build/font-awesome.css')
+    link(rel='stylesheet', href='build/style.css')
   body
     .page-header
       ul
@@ -12,7 +11,9 @@ html
           a(class="pure-button pure-button-primary" href="/") Main
         if logged == true
           li
-            a(class="pure-button pure-button-primary" href="users") My Page
+            a(class="pure-button pure-button-primary" href="mypage") My Page
+          li
+            a(class="pure-button pure-button-primary" href="chat") Chat
           li
             form(method='POST', action="logout")
               button( type="submit" class="pure-button pure-button-primary") Log Out
