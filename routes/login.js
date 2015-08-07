@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
         function (isMatch, user, callback) {
             if (user) {
                 isMatch ? callback(null, user) : callback({
-                    status: 403,
+                    status: 400,
                     message: 'Incorrect password!'
                 });
             } else {

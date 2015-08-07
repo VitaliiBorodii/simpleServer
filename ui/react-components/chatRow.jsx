@@ -14,13 +14,22 @@ module.exports = React.createClass({
         var item = this.props.item,
             message = item.message,
             name = item.userName,
-            date = item.createdDate;
+            date = (function (d) {
+                var date = new Date(d || null),
+                    year = date.getFullYear(),
+                    month = date.getMonth(),
+                    day = date.getDate(),
+                    hours = date.getHours(),
+                    minutes = date.getMinutes(),
+                    seconds = date.getSeconds();
+                return /*[day,month,year].join('/') + ' ' +*/ [hours, minutes, seconds].join(':')
+            })(item.createdDate);
         return (<li className="chatMessage">
-            <span>{name}</span>
-            <span>{date}</span>
-
-            <div className="bubble">
-                {message}
+            <div className="info">
+                <p><b>{name}</b> {' wrote:'}<br /> {'at '} {date}</p>
+            </div>
+            <div className="arrow_box">
+                <p>{message}</p>
             </div>
         </li>)
     }

@@ -6,13 +6,28 @@ var ChatRow = require('./chatRow');
 module.exports = React.createClass({
     getInitialState: function () {
         return {
-            messages: [{
-                _id: 564,
-                userName: 'vasya',
-                date: (new Date).toLocaleDateString(),
-                message: 'test message'
-            }]
+            messages: []
         };
+    },
+    componentDidMount: function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/messages/?limit=15', true);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                var data;
+                try {
+                    data = JSON.parse(xhr.responseText);
+                } catch (err) {
+                    data = [];
+                    console.error(err)
+                }
+                this.setState({
+                    messages: data
+                })
+            }
+        }.bind(this);
+        xhr.send(null);
     },
     editMessage: function (id, message) {
         debugger
@@ -20,13 +35,17 @@ module.exports = React.createClass({
     deleteMessage: function (id) {
         debugger
     },
+    componentDidUpdate: function (e) {
+        var el = this.getDOMNode().childNodes[0];
+        el.scrollTop = el.scrollHeight;
+    },
     addMessage: function (message) {
-        console.log(message)
         var state = this.state.messages;
+        this.props.sendMessage(message)
         state.push({
             _id: Math.random(),
             userName: 'vasya',
-            createdDate: (new Date).toLocaleDateString(),
+            createdDate: Date.now(),
             message: message
         });
         this.setState(state);
@@ -40,9 +59,9 @@ module.exports = React.createClass({
         return (
             <div className="chatWrapper">
                 <div className="chatBody">
-                    <ul className="conversation">
+                    <ol>
                         {rows}
-                    </ul>
+                    </ol>
                 </div>
                 <InputRow handleSend={this.addMessage}/>
             </div>

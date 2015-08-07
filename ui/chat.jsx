@@ -2,14 +2,31 @@
 var React = require('react');
 var ChatTable = require('./react-components/chatTable.jsx');
 require('./css/chat.css');
-var strings = {
-    'connected': '[sys][time]%time%[/time]: You have successfully connected to server [user]%name%[/user].[/sys]',
-    'userJoined': '[sys][time]%time%[/time]: User [user]%name%[/user] joined to chat.[/sys]',
-    'messageSent': '[out][time]%time%[/time]: [user]%name%[/user]: %text%[/out]',
-    'messageReceived': '[in][time]%time%[/time]: [user]%name%[/user]: %text%[/in]',
-    'userSplit': '[sys][time]%time%[/time]: User [user]%name%[/user] have left thid chat.[/sys]'
-};
-var socket;
 window.onload = function () {
-    React.render(<ChatTable />, document.getElementById('chat-content'));
+    var events = {
+        connected: 'Your connection ID is: %id%',
+        join: 'Joined %name%',
+        split: 'Leave %name%',
+        messagesent: 'you msesage is %message%',
+        newmessage: 'new message - %message% from %name%'
+    };
+    var profile = {};
+
+    var socket = io.connect(location.protocol + '//' + location.host);
+    socket.on('connect', function (data) {
+        profile = data;
+    });
+    socket.on('message', function (message) {
+        var type = message.event,
+            data = message.data,
+            str = events[type];
+        var msg = str.replace(/%id%/, data.id).replace(/%name%/, data.userName).replace(/%message%/, data.message);
+        console.log(msg)
+    });
+    var sendMessage = function (msg) {
+        socket.emit('message', {
+            message: msg
+        });
+    };
+    React.render(<ChatTable sendMessage={sendMessage}/>, document.getElementById('chat-content'));
 };

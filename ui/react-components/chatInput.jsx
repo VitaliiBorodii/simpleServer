@@ -3,7 +3,7 @@ var React = require('react');
 module.exports = React.createClass({
     addItem: function (e, id) {
         e.preventDefault();
-        var input = this.getDOMNode().getElementsByTagName('input')[0];
+        var input = this.getDOMNode().getElementsByTagName('textarea')[0];
         var itemName = input.value;
         if (itemName) {
             this.props.handleSend(itemName);
@@ -12,9 +12,9 @@ module.exports = React.createClass({
     },
     render: function () {
         return (<div>
-            <form className="pure-form" onSubmit={this.addItem}>
-                <input style={{marginRight: "10px"}} type="text" placeholder="Type message here..."/>
-                <input className="pure-button pure-button-primary" type="submit" value="Send"/>
+            <form className="pure-form chatInput" onSubmit={this.addItem}>
+                <textarea style={{marginRight: "10px"}} placeholder="Type message here..."/>
+                <button className="pure-button pure-button-primary" type="submit">Send</button>
             </form>
         </div>)
     }
