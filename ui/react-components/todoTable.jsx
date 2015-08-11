@@ -23,7 +23,7 @@ module.exports = React.createClass({
                     console.error(err)
                 }
                 this.setState({
-                    items: data
+                    items: data.content
                 })
             }
         }.bind(this);

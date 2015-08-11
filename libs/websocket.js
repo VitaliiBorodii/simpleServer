@@ -27,7 +27,14 @@ module.exports = function (socket) {
             socket.broadcast.json.send({'event': 'newmessage', data: data || err});
         });
     });
-
+    socket.on('typing', function (data) {
+        socket.broadcast.json.send({
+            'event': 'typing', data: {
+                userName: userName,
+                typing: data.type
+            }
+        });
+    });
     socket.on('disconnect', function () {
         socket.broadcast.json.send({
             'event': 'split', data: {
