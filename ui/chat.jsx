@@ -71,11 +71,11 @@ window.onload = function () {
         var type = message.event,
             data = message.data,
             str = events[type];
-        var msg = str.replace(/%id%/, data.id).replace(/%name%/, data.userName).replace(/%message%/, data.message);
-        console.log(msg)
+        var msg = str.replace(/%id%/, data.user.id).replace(/%name%/, data.user.name).replace(/%message%/, data.message);
+        console.log(msg);
         switch (type) {
             case 'connected':
-                React.render(<ChatTable typing={typing} userId={data.id} load={load}
+                React.render(<ChatTable typing={typing} user={data.user} load={load}
                                         add={add}/>, document.getElementById('chat-content'));
                 load();
                 break;

@@ -6,12 +6,9 @@ var Schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userId: {
-        type: String,
+    user: {
+        type: Object,
         required: true
-    },
-    userName: {
-        type: String
     },
     createdDate: {
         type: Date,

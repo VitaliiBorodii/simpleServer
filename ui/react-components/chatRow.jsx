@@ -63,7 +63,7 @@ module.exports = React.createClass({
             })(item.createdDate);
         var className,
             rowClass,
-            mine = item.userId === this.props.userId;
+            mine = item.user.id === this.props.user.id;
         if (mine) {
             rowClass = ''//'chatRight';
             className = 'bubble bubble-alt';
@@ -71,7 +71,7 @@ module.exports = React.createClass({
         } else {
             rowClass = ''//'chatLeft';
             className = 'bubble';
-            name = item.userName
+            name = item.user.name
         }
         if (item.new) {
             className += ' appearance';

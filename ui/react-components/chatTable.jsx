@@ -61,7 +61,7 @@ module.exports = React.createClass({
             if (message.new) {
                 this.props.scrolling = false;
             }
-            rows.push(<ChatRow handleEdit={this.editMessage} userId={this.props.userId}
+            rows.push(<ChatRow handleEdit={this.editMessage} user={this.props.user}
                                handleDelete={this.deleteMessage} item={message}
                                key={message._id}/>);
         }.bind(this));
