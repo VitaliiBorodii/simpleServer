@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
+var engine = require('express-dot-engine');
+var tempEngine = 'dot';
 var db = require('./libs/mongo');
 var expressSession = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(expressSession);
@@ -40,8 +42,9 @@ io.use(sharedsession(session, {
 io.on('connection', wsHandler);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('dot', engine.__express);
+app.set('views', path.join(__dirname, 'views', tempEngine));
+app.set('view engine', tempEngine);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -80,6 +83,7 @@ var dev = (app.get('env') === 'development');
       },
       html: function () {
         res.render('error', {
+          title: 'Error',
           logged: !!req.session.userId,
           message: err.message,
           error: dev ? err : {}
@@ -92,5 +96,5 @@ var dev = (app.get('env') === 'development');
   });
 
 server.listen(config.get('port'));
-
+console.log('\x1b[32mServer is running on \x1b[0m\x1b[35m' + config.get('port') + '\x1b[0m port');
 module.exports = app;

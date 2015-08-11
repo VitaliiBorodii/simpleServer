@@ -9,7 +9,8 @@ router.get('/', function (req, res, next) {
 });
 router.post('/', function(req, res, next) {
     var email = req.body.email,
-        password = req.body.password;
+        password = req.body.password,
+        name = req.body.name;
     async.waterfall([
         function(callback) {
             User.findOne({email : email}, callback)
@@ -31,7 +32,7 @@ router.post('/', function(req, res, next) {
                     message: 'Incorrect password!'
                 });
             } else {
-                user = new User({email: email, hashedPassword: password});
+                user = new User({email: email, hashedPassword: password, username: name});
                 user.save(function (err) {
                     if (err) return next(err);
                     callback(null, user);
@@ -42,7 +43,7 @@ router.post('/', function(req, res, next) {
         function (err, user) {
             if (err) return next(err);
             req.session.userId = user.get('_id');
-            req.session.userName = user.get('username') || user.get('email');
+            req.session.userName = user.get('username');
             if (!req.body.remember) {
                 req.session.cookie.expires = false;
             }

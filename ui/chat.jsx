@@ -2,6 +2,7 @@
 var React = require('react');
 var ChatTable = require('./react-components/chatTable.jsx');
 var actions = require('./factories/messagesStoreActions');
+var io = require('socket.io-client');
 require('./css/chat.css');
 window.onload = function () {
     var events = {

@@ -37,7 +37,9 @@ module.exports = React.createClass({
             });
             this.props.previousLimit = limit;
             el.scrollTop = 10;
-            this.props.scrolling = true;
+            this.setProps({
+                scrolling: true
+            })
         }
     },
     editMessage: function (id, message) {
@@ -57,14 +59,18 @@ module.exports = React.createClass({
     },
     render: function () {
         var rows = [];
+        var newMsg;
         _.forEachRight(this.state.messages, function (message) {
             if (message.new) {
-                this.props.scrolling = false;
+                newMsg = true;
             }
             rows.push(<ChatRow handleEdit={this.editMessage} user={this.props.user}
                                handleDelete={this.deleteMessage} item={message}
                                key={message._id}/>);
         }.bind(this));
+        if (newMsg) {
+            this.props.scrolling = false
+        }
         return (
             <div className="chatWrapper">
                 <div onScroll={this.handleScroll} className="chatBody">

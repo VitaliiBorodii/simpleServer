@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Log In</title>
+    <link rel="stylesheet", href="build/style.css">
+    <link rel="stylesheet", href="build/login.css">
+  </head>
+  <body>
+        <div class="login-form">
+            <form class="pure-form pure-form-aligned" method="POST", action="/login">
+              <fieldset>
+                <div class="pure-control-group">
+                    <label for="name">UserName:</label>
+                    <input id="name" name="name" type="text" placeholder="Username">
+                </div>
+                <div class="pure-control-group">
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" type="email" placeholder="Email" reqiured>
+                </div>
+                <div class="pure-control-group">
+                    <label for="password">Password:</label>
+                    <input id="password" name="password" type="password" placeholder="Password" reqiured>
+                </div>
+                 <div class="pure-control-group">
+                     <label for="remember" class="pure-checkbox">
+                        <input id="remember" name="remember" type="checkbox">
+                        <span>Remember me</span>
+                     </label>
+                 </div>
+                 <div class="pure-control-group">
+                      <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                 </div>
+                 </fieldset>
+            </form>
+        </div>
+  </body>
+</html>
