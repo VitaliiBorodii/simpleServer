@@ -7,11 +7,22 @@ module.exports = function (modelName) {
         var args = [],
             query;
         var filter = req.query.filter;
+        var page = +req.query.page || 0;
         var limit = req.query.limit || 100;
-        var sort = req.query.sort;
+        var sort = req.query.sort || null;
         var callback = function (err, data) {
             if (err) return next(err);
-            res.send(data);
+            var json = {
+                content: data,
+                page: {
+                    pageNumber: page,
+                    pageSize: limit,
+                    sort: sort,
+                    totalCount: data.length
+                },
+                success: true
+            };
+            res.send(json);
         };
         if (req.middle && req.middle.conditions) {
             args.push(req.middle.conditions);
@@ -22,7 +33,24 @@ module.exports = function (modelName) {
                 query = query.where(type).equals(value);
             })
         }
+        if (page && limit) {
+            var skip = limit * (page - 1);
+            if (isNaN(skip)) {
+                return res.status(400).send({
+                    content: 'Limit and Page must be integer',
+                    success: false
+                });
+            }
+            query = query.skip(skip);
+        }
         if (limit) {
+            limit = +limit;
+            if (isNaN(limit)) {
+                return res.status(400).send({
+                    content: 'Limit must be integer',
+                    success: false
+                });
+            }
             query = query.limit(limit);
         }
         if (sort) {
@@ -49,7 +77,17 @@ module.exports = function (modelName) {
         Model.find(conditions, function (err, data) {
             if (err) return next(err);
             if (data) {
-                res.send(data);
+                var json = {
+                    content: data,
+                    page: {
+                        pageNumber: 1,
+                        pageSize: 1,
+                        sort: null,
+                        totalCount: 1
+                    },
+                    success: true
+                };
+                res.send(json);
             } else {
                 res.sendStatus(404);
             }
@@ -62,7 +100,17 @@ module.exports = function (modelName) {
             if (err) {
                 next(err);
             }
-            res.send(data);
+            var json = {
+                content: data,
+                page: {
+                    pageNumber: 1,
+                    pageSize: 1,
+                    sort: null,
+                    totalCount: 1
+                },
+                success: true
+            };
+            res.send(json);
         });
     };
 
