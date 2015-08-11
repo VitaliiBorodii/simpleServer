@@ -76,28 +76,25 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 console.log('ENV= ', app.get('env'));
-if (app.get('env') === 'development') {
+var dev = (app.get('env') === 'development');
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      logged: !!req.session.userId,
-      message: err.message,
-      error: err
+    res.format({
+      text: function () {
+        res.send(err.message);
+      },
+      html: function () {
+        res.render('error', {
+          logged: !!req.session.userId,
+          message: err.message,
+          error: dev ? err : {}
+        });
+      },
+      json: function () {
+        res.send({content: err.message, success: false});
+      }
     });
   });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    logged: !!req.session.userId,
-    message: err.message,
-    error: {}
-  });
-});
-
 
 server.listen(config.get('port'));
 
