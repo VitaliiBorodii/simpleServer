@@ -13,31 +13,22 @@ module.exports = React.createClass({
         }
     },
     setLimit: function (limit) {
-        this.setProps({
-            limit: limit,
-            page: 1,
-            total: this.props.total
-        }, function () {
-            this.componentDidMount();
-        }.bind(this));
+        this.props.limit = limit;
+        this.props.page = 1;
+        this.fetchData();
     },
     setPage: function (val) {
         var nexPage = this.props.page + val;
         nexPage = (nexPage > 0) ? nexPage : 1;
-        this.setProps({
-            limit: this.props.limit,
-            page: nexPage,
-            total: this.props.total
-        }, function () {
-            this.componentDidMount();
-        }.bind(this));
+        this.props.page = nexPage;
+        this.fetchData();
     },
     getInitialState: function () {
         return {
             items: []
         };
     },
-    componentDidMount: function () {
+    fetchData: function () {
         var page = this.props.page,
             limit = this.props.limit;
         var xhr = new XMLHttpRequest();
@@ -52,21 +43,19 @@ module.exports = React.createClass({
                     data = [];
                     console.error(err)
                 }
+                if (data.page) {
+                    this.props.total = data.page.total;
+                }
                 this.setState({
                     items: data.content
                 });
-                if (data.page) {
-                    this.setProps({
-                        limit: this.props.limit,
-                        page: this.props.page,
-                        total: data.page.total
-                    }, function () {
-                        this.render();
-                    }.bind(this));
-                }
             }
         }.bind(this);
         xhr.send(null);
+    },
+    componentDidMount: function () {
+        console.log('mounted');
+        this.fetchData();
     },
     markDone: function (id) {
         var data = {
@@ -77,7 +66,7 @@ module.exports = React.createClass({
         xhr.setRequestHeader('Content-type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                this.componentDidMount();
+                this.fetchData();
             }
         }.bind(this);
         xhr.send(JSON.stringify(data));
@@ -95,7 +84,7 @@ module.exports = React.createClass({
         xhr.setRequestHeader('Content-type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                this.componentDidMount();
+                this.fetchData();
             }
         }.bind(this);
         xhr.send(null);
@@ -109,7 +98,7 @@ module.exports = React.createClass({
         xhr.setRequestHeader('Content-type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                this.componentDidMount();
+                this.fetchData();
             }
         }.bind(this);
         xhr.send(JSON.stringify(data));

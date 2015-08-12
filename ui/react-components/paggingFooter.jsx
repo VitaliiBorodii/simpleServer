@@ -27,6 +27,7 @@ module.exports = React.createClass({
             page = this.props.currPage,
             total = this.props.allTotal,
             limit = this.props.currLimit,
+            currBottom = limit * (page - 1),
             last = (limit * page) >= total,
             nextCls = ' active',
             prevCls = ' active';
@@ -47,8 +48,7 @@ module.exports = React.createClass({
                 <i onClick={this.prev} className={"fa fa-lg fa-fast-backward" + prevCls}></i>
                 <span> {page} </span>
                 <i onClick={this.next} val="1" className={"fa fa-lg fa-fast-forward" + nextCls}></i>
-                <span> {'Shown: ' + count} </span>
-                <span> {'Total: ' + total} </span>
+                <span> {'Shown: ' + (currBottom + 1) + ' - ' + (currBottom + +count) + ' from ' + total }</span>
             </td>
         </tr>)
     }
