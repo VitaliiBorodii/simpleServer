@@ -1,5 +1,17 @@
-.pure-table td span:hover {
+.pure-table td .fa:hover {
     cursor: pointer
+}
+
+.todoFooter .fa {
+    padding: 10px 5px;
+}
+
+.disabled {
+    color: gray
+}
+
+.todoFooter .active:hover {
+    color: blue;
 }
 
 .pure-table td .fa-check-circle-o {
@@ -10,11 +22,7 @@
     color: green
 }
 
-.item-done {
-    color: gray;
-}
-
-.item-done > td:first-child {
+.disabled > td:first-child {
     text-decoration: line-through;
 }
 

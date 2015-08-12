@@ -42,10 +42,10 @@ module.exports = React.createClass({
                     var day = date.getDate(),
                         hours = date.getHours(),
                         minutes = date.getMinutes(),
-                        seconds = date.getSeconds(),
-                        time = [hours, minutes, seconds].join(':');
+                        seconds = date.getSeconds();
                     minutes = minutes.toString().length < 2 ? '0' + minutes : minutes;
                     seconds = seconds.toString().length < 2 ? '0' + seconds : seconds;
+                    var time = [hours, minutes, seconds].join(':');
                     if (tDay === day) {
                         date = 'Today at ' + time;
                     } else if (tDay - 1 === day) {
@@ -62,21 +62,18 @@ module.exports = React.createClass({
             return date
             })(item.createdDate);
         var className,
-            rowClass,
             mine = item.user.id === this.props.user.id;
         if (mine) {
-            rowClass = ''//'chatRight';
             className = 'bubble bubble-alt';
             name = 'You'
         } else {
-            rowClass = ''//'chatLeft';
             className = 'bubble';
             name = item.user.name
         }
         if (item.new) {
             className += ' appearance';
         }
-        return (<li className={rowClass}>
+        return (<li>
             <div className={className}>
                 <span className="info"><b>{name}</b> {date}</span>
                 <p>{message}</p>

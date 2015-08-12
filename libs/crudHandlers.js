@@ -12,17 +12,33 @@ module.exports = function (modelName) {
         var sort = req.query.sort || null;
         var callback = function (err, data) {
             if (err) return next(err);
-            var json = {
-                content: data,
-                page: {
-                    pageNumber: page,
-                    pageSize: limit,
-                    sort: sort,
-                    totalCount: data.length
-                },
-                success: true
-            };
-            res.send(json);
+            var docs = data;
+            var args = [],
+                query;
+            if (req.middle && req.middle.conditions) {
+                args.push(req.middle.conditions);
+            }
+            query = Model.count.apply(Model, args);
+            if (filter) {
+                _.forEach(filter, function (value, type) {
+                    query = query.where(type).equals(value);
+                })
+            }
+            query.exec(function (err, count) {
+                if (err) return next(err);
+                var json = {
+                    content: docs,
+                    page: {
+                        pageNumber: page,
+                        pageSize: limit,
+                        sort: sort,
+                        totalCount: docs.length,
+                        total: count
+                    },
+                    success: true
+                };
+                res.send(json);
+            });
         };
         if (req.middle && req.middle.conditions) {
             args.push(req.middle.conditions);

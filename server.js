@@ -1,10 +1,13 @@
 var express = require('express');
 var path = require('path');
+var fs = require('fs');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
+var https = require('https');
+var net = require('net');
 var engine = require('express-dot-engine');
 var tempEngine = 'dot';
 var db = require('./libs/mongo');
@@ -31,16 +34,51 @@ var logout = require('./routes/logout');
 var todos = require('./routes/todos');
 var messages = require('./routes/messages');
 var app = express();
-var server = http.createServer(app);
+var port = config.get('port'),
+    httpPort = port + 1,
+    httpsPort = port + 2;
+
+var httpServer = http.createServer(app);
 var sharedsession = require("express-socket.io-session");
 var wsHandler = require('./libs/websocket');
-var io = require('socket.io').listen(server);
-io.use(sharedsession(session, {
+var io = require('socket.io');
+
+var httpIo = io.listen(httpServer);
+httpIo.use(sharedsession(session, {
   autoSave: true
 }));
+httpIo.on('connection', wsHandler);
 
-io.on('connection', wsHandler);
+/* In case you wanted https
+ net.createServer(function tcpConnection(conn) {
+ conn.once('data', function (buf) {
+ // A TLS handshake record starts with byte 22.
+ var address = (buf[0] === 22) ? httpsPort : httpPort;
+ var proxy = net.createConnection(address, function () {
+ proxy.write(buf);
+ conn.pipe(proxy).pipe(conn);
+ });
+ });
+ }).listen(port);
 
+ // This line is from the Node.js HTTPS documentation.
+ var credentials = {
+ key: fs.readFileSync('./config/server.key', 'utf8'),
+ cert: fs.readFileSync('./config/server.crt', 'utf8')
+ };
+
+ var httpsServer = https.createServer(credentials, app);
+ var sharedsession = require("express-socket.io-session");
+ var wsHandler = require('./libs/websocket');
+ var io = require('socket.io');
+
+ var httpsIo = io.listen(httpsServer);
+ httpsIo.use(sharedsession(session, {
+ autoSave: true
+ }));
+
+ httpsIo.on('connection', wsHandler);
+ */
 // view engine setup
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, 'views', tempEngine));
@@ -95,6 +133,8 @@ var dev = (app.get('env') === 'development');
     });
   });
 
-server.listen(config.get('port'));
-console.log('\x1b[32mServer is running on \x1b[0m\x1b[35m' + config.get('port') + '\x1b[0m port');
+httpServer.listen(port);
+// Create an HTTPS service identical to the HTTP service.
+//httpsServer.listen(httpsPort);
+console.log('\x1b[32mServer is running on \x1b[0m\x1b[35m' + port + '\x1b[0m port');
 module.exports = app;
