@@ -19,6 +19,7 @@
                     </li>
                     [[??]]
                     <li><a class="pure-button pure-button-primary" href="login">Log In</a></li>
+                    <li><a class="pure-button pure-button-primary" href="signin">Sign In</a></li>
                     [[?]]
             </ul>
         </div>

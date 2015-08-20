@@ -4,15 +4,19 @@
     <title>Log In</title>
     <link rel="stylesheet", href="build/style.css">
     <link rel="stylesheet", href="build/login.css">
+    <script src="build/login.js"></script>
   </head>
   <body>
         <div class="login-form">
-            <form class="pure-form pure-form-aligned" method="POST", action="/login">
+            <form class="pure-form pure-form-aligned" method="POST">
               <fieldset>
+              [[? !model.login]]
                 <div class="pure-control-group">
                     <label for="name">UserName:</label>
-                    <input id="name" name="name" type="text" placeholder="Username">
+                    <input id="name" name="name" type="text" placeholder="Username" required>
                 </div>
+                [[??]]
+                [[?]]
                 <div class="pure-control-group">
                     <label for="email">Email:</label>
                     <input id="email" name="email" type="email" placeholder="Email" reqiured>
