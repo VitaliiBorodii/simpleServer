@@ -35,7 +35,7 @@ Then application will print in console which server is running, go to {http|| ht
 <b>There are several pages available:</b>
 #####/
 This is simple page that only have links to other pages and welcome text for logged users.
-######/login
+#####/login
 Page for login  system.
 #####/signup
 Page for signing in system.
