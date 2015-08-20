@@ -8,7 +8,7 @@ Server also uses socket.io as a library for more convenient work with websocket.
   1. install Node.js and MongoDB;
   2. run 'npm install';
   3. create folder '/config' and put in it file main.json with content:
-    {
+    `{
       "port" : {port int},
       "session": {
         "secret": {your_secret string},
@@ -24,7 +24,7 @@ Server also uses socket.io as a library for more convenient work with websocket.
       "port": {mongo_db_port |default 27017},
       "uri": {uri_to_connect_mongodb}
     }
-  }
+  }`
   4. Run 'node server':
     4.1 'node server' or 'node server --https=false' will run http server
     4.2 'node server -https=true' or 'node server --https=true' will run https server, but to do that you need to put 'server.key' and 'server.crt', ssl key and certificate files respectively, into config directory.
