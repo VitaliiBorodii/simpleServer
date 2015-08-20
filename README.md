@@ -1,12 +1,11 @@
 Simple Node.js server
--------------------------------
-server side
--------------------------------
+# server side
+
 This is server written on Node.js, it can be launched both on http or https instance.
 For data storage it uses MongoDB and mongoose driver.
 For generating HTML markup it uses doTjs templating library (there are also Jade templates, but they are deprecated).
 Server also uses socket.io as a library for more convenient work with websocket.
-#To run server run follow this steps:
+--To run server run follow this steps:
   1. install Node.js and MongoDB;
   2. run 'npm install';
   3. create folder '/config' and put in it file main.json with content:
