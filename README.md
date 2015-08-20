@@ -42,5 +42,4 @@ There are several pages available:
   Page with todo list table written with the use of React.js. Todo list supports adding, editing and deleting items, it also has pagination.
 '/chat',
   Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
-  
-    To build UI go to ui folder, run 'npm install' then 'webpack' (to do this you must install webpack globally!)
+###To build UI go to ui folder, run `'npm install'` then `'webpack'` (to do this you must install webpack globally!)
