@@ -44,4 +44,4 @@ Server also uses socket.io as a library for more convenient work with websocket.
   <i>Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.</i>
 ###To build UI follow this steps:
   1. go to 'ui' folder and run `npm install` 
-  2. then run `webpack` (to do this you must install ~webpack~ globally!)
+  2. then run `webpack` (to do this you must install <a href="http://webpack.github.io/">webpack<a> globally!)
