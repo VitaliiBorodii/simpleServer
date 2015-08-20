@@ -32,7 +32,7 @@ Server also uses socket.io as a library for more convenient work with websocket.
 
 ##Client side
 There are several pages available:
-'/':
+'/':</br>
   This is simple page that only have links to other pages and welcome text for logged users.
 '/login':
   Page for login  system.
@@ -41,7 +41,7 @@ There are several pages available:
 '/mypage'
   Page with todo list table written with the use of React.js. Todo list supports adding, editing and deleting items, it also has pagination.
 '/chat':
-  --Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
+  Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
 ###To build UI follow this steps:
   1. go to ui folder and run `npm install` 
   2. then run `webpack` (to do this you must install ~webpack~ globally!)
