@@ -5,7 +5,7 @@ For data storage it uses MongoDB and mongoose driver.
 For generating HTML markup it uses doTjs templating library (there are also Jade templates, but they are deprecated).
 Server also uses socket.io as a library for more convenient work with websocket.
 ### To launch server follow this steps:
-  1. install <a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="http://docs.mongodb.org/manual/installation">MongoDB<a>
+  1. install <a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="http://docs.mongodb.org/manual">MongoDB<a>
   2. run `npm install`
   3. create folder '/config' and put in it file main.json with content:
     `{
@@ -28,7 +28,8 @@ Server also uses socket.io as a library for more convenient work with websocket.
   4. Run 'node server':
     </br>4.1 `node server` or `node server --https=false` will run http server
     </br>4.2 `node server -https=true` or `node server --https=true` will run https server, but to do that you need to put 'server.key' and 'server.crt', ssl key and certificate files respectively, into config directory.
-</br>Then application will print in console which server is running, go to {http|| https}://localhost:1337/ to see the result.
+
+Then application will print in console which server is running, go to {http|| https}://localhost:1337/ to see the result.
 
 ##Client side
 <b>There are several pages available:</b>
