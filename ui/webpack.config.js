@@ -1,13 +1,20 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var buildDir = '../public/build';
+var entriesDir = './webpack-entrypoints/';
+var _ = require('lodash');
+var argv = require('optimist').argv;
+var entry = argv.entryPoint || (function () {
+        var fs = require('fs');
+        return fs.readdirSync(entriesDir).join();
+    })();
+var entries = entry.split(',');
+var entryPoints = {};
+_.forEach(entries, function (point) {
+    _.merge(entryPoints, require(entriesDir + point))
+});
+console.log(entryPoints)
 module.exports = {
-    entry: {
-        user: './todo.jsx',
-        chat: './chat.jsx',
-        'font-awesome': 'font-awesome-webpack!./less/font-awesome.config.js',
-        style: './css/style.css',
-        login: './css/login.css'
-    },
+    entry: entryPoints,
     output: {
         path: buildDir,
         filename: '[name].js'
@@ -24,7 +31,7 @@ module.exports = {
             {test: /\.less$/, loader: 'style!css!less'}
         ]
     },
-    watch: true,
+    //watch: true,
     resolve: {
         modulesDirectories: ['node_modules'],
         extensions: ['', '.js', '.jsx']

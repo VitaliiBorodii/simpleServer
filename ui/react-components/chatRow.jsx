@@ -50,8 +50,8 @@ module.exports = React.createClass({
                         date = 'Today at ' + time;
                     } else if (tDay - 1 === day) {
                         date = 'Yesterday at ' + time;
-                    } else if (yDay > day) {
-                        date = pre[day - yDay] + ' days ago at ' + time;
+                    } else if (tDay > day) {
+                        date = pre[tDay - day] + ' days ago at ' + time;
                     }
                 } else if (tMonth > month) {
                     date = pre[tMonth - month] + ' months ago';

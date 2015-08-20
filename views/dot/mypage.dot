@@ -4,8 +4,8 @@ title: [[= model.title]]
 ---
 
 [[##content:
-   <link rel="stylesheet", href="build/user.css">
+   <link rel="stylesheet", href="build/mypage.css">
      <h1>Hello [[= model.name]]!</h1>
      <div id="content"></div>
-     <script src="build/user.js"></script>
+     <script src="build/mypage.js"></script>
 #]]
