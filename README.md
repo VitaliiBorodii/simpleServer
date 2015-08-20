@@ -28,20 +28,20 @@ Server also uses socket.io as a library for more convenient work with websocket.
   4. Run 'node server':
     </br>4.1 `node server` or `node server --https=false` will run http server
     </br>4.2 `node server -https=true` or `node server --https=true` will run https server, but to do that you need to put 'server.key' and 'server.crt', ssl key and certificate files respectively, into config directory.
-Then application will print in console which server is running, go to {http|| https}://localhost:1337/ to see the result.
+</br>Then application will print in console which server is running, go to {http|| https}://localhost:1337/ to see the result.
 
 ##Client side
 <b>There are several pages available:</b>
 #####/
-  This is simple page that only have links to other pages and welcome text for logged users.
+  <i>This is simple page that only have links to other pages and welcome text for logged users.</i>
 ######/login
-  Page for login  system.
+  <i>Page for login  system.</i>
 #####/signup
-  Page for signing in system.
+  <i>Page for signing in system.</i>
 #####/mypage
-  Page with todo list table written with the use of React.js. Todo list supports adding, editing and deleting items, it also has pagination.
+  <i>Page with todo list table written with the use of React.js. Todo list supports adding, editing and deleting items, it also has pagination.</i>
 #####/chat
-  Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
+  <i>Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.</i>
 ###To build UI follow this steps:
-  1. go to ui folder and run `npm install` 
+  1. go to 'ui' folder and run `npm install` 
   2. then run `webpack` (to do this you must install ~webpack~ globally!)
