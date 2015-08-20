@@ -1,5 +1,6 @@
+var sharedsession = require("express-socket.io-session");
 var Messages = require('../models/messages');
-module.exports = function (socket) {
+function chatConnect(socket) {
     var session = socket.handshake.session;
     var user = {
         id: session.userId,
@@ -43,4 +44,11 @@ module.exports = function (socket) {
             }
         });
     });
+};
+
+module.exports = function (socket, session) {
+    socket.use(sharedsession(session, {
+        autoSave: true
+    }));
+    socket.on('connection', chatConnect);
 };

@@ -5,106 +5,62 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var http = require('http');
-var https = require('https');
 var net = require('net');
 var engine = require('express-dot-engine');
 var tempEngine = 'dot';
 var db = require('./libs/mongo');
-var expressSession = require('express-session');
-var MongoDBStore = require('connect-mongodb-session')(expressSession);
 var config = require('./libs/config');
-var session = expressSession({
-  cookie: config.get('session:cookie'),
-  key: config.get('session:name'),
-  secret: config.get('session:secret'),
-  store: new MongoDBStore({
-    uri: config.get('mongo:uri')
-  }),
-  proxy: true,
-  resave: true,
-  saveUninitialized: true
-});
-var auth = require('./libs/auth');
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var chat = require('./routes/chat');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var todos = require('./routes/todos');
-var messages = require('./routes/messages');
-var app = express();
-var port = config.get('port'),
-    httpPort = port + 1,
-    httpsPort = port + 2;
+var session = require('./libs/session')(config);
 
-var httpServer = http.createServer(app);
-var sharedsession = require("express-socket.io-session");
-var wsHandler = require('./libs/websocket');
+var routes = require('./routes');
 var io = require('socket.io');
 
-var httpIo = io.listen(httpServer);
-httpIo.use(sharedsession(session, {
-  autoSave: true
-}));
-httpIo.on('connection', wsHandler);
+var app = express();
+var port = config.get('port');
 
-/* In case you wanted https
- net.createServer(function tcpConnection(conn) {
- conn.once('data', function (buf) {
- // A TLS handshake record starts with byte 22.
- var address = (buf[0] === 22) ? httpsPort : httpPort;
- var proxy = net.createConnection(address, function () {
- proxy.write(buf);
- conn.pipe(proxy).pipe(conn);
- });
- });
- }).listen(port);
+var https;
 
- // This line is from the Node.js HTTPS documentation.
- var credentials = {
- key: fs.readFileSync('./config/server.key', 'utf8'),
- cert: fs.readFileSync('./config/server.crt', 'utf8')
- };
+var args = process.argv,
+    len = args.length;
+for (var i = 0; i < len; i++) {
+    if (/https=true/.test(args[i])) {
+        https = true;
+        break;
+    } else if (/https=false/.test(args[i])) {
+        https = false;
+    }
+}
+var serverCore = require(https ? 'https' : 'http'),
+    server;
+if (!https) {
+    server = serverCore.createServer(app);
+} else {
+    var credentials = {
+        key: fs.readFileSync('./config/server.key', 'utf8'),
+        cert: fs.readFileSync('./config/server.crt', 'utf8')
+    };
 
- var httpsServer = https.createServer(credentials, app);
- var sharedsession = require("express-socket.io-session");
- var wsHandler = require('./libs/websocket');
- var io = require('socket.io');
+    server = serverCore.createServer(credentials, app);
+}
 
- var httpsIo = io.listen(httpsServer);
- httpsIo.use(sharedsession(session, {
- autoSave: true
- }));
-
- httpsIo.on('connection', wsHandler);
- */
+var chatWs = require('./libs/websocket');
+var socket = io.listen(server);
+chatWs(socket, session);
 // view engine setup
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, 'views', tempEngine));
 app.set('view engine', tempEngine);
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session);
-
-app.use('/', routes);
-app.use('/login', login);
-app.use('/logout', logout);
 app.use(express.static('public'));
-
-app.use(auth);
-app.use('/mypage', users);
-app.use('/chat', chat);
-// REST API
-app.use('/todos', todos);
-app.use('/messages', messages);
-
+routes(app);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -133,8 +89,8 @@ var dev = (app.get('env') === 'development');
     });
   });
 
-httpServer.listen(port);
+server.listen(port);
 // Create an HTTPS service identical to the HTTP service.
 //httpsServer.listen(httpsPort);
-console.log('\x1b[32mServer is running on \x1b[0m\x1b[35m' + port + '\x1b[0m port');
+console.log('http' + (https ? 's' : '') + ' \x1b[32mServer is running on \x1b[0m\x1b[35m' + port + '\x1b[0m port');
 module.exports = app;
