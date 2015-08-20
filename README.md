@@ -1,6 +1,6 @@
 #Simple Node.js server
 ##Server side
-This is server written on Node.js, it can be launched both on http or https instance.
+This is server written on Node.js, it can be launched both in http or https instances.
 For data storage it uses MongoDB and mongoose driver.
 For generating HTML markup it uses doTjs templating library (there are also Jade templates, but they are deprecated).
 Server also uses socket.io as a library for more convenient work with websocket.
@@ -27,9 +27,9 @@ Server also uses socket.io as a library for more convenient work with websocket.
   }`
   4. Run 'node server':
     </br>4.1 `node server` or `node server --https=false` will run http server
-    </br>4.2 `node server -https=true` or `node server --https=true` will run https server, but to do that you need to put 'server.key' and 'server.crt', ssl key and certificate files respectively, into config directory.
+    </br>4.2 `node server -https=true` or `node server --https=true` will run https server, but to do that you need to put 'server.key' and 'server.crt', ssl key and certificate files respectively, into '/config' directory.
 
-Then application will print in console which server is running, go to {http|| https}://localhost:1337/ to see the result.
+Then application will print to console which server is running, go to {http|| https}://localhost:1337/ to see the result.
 
 ##Client side
 <b>There are several pages available:</b>
@@ -44,5 +44,5 @@ Page with todo list table written with the use of React.js. Todo list supports a
 #####/chat
 Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
 ###To build UI follow this steps:
-  1. go to 'ui' folder and run `npm install` 
+  1. go to '/ui' folder and run `npm install` 
   2. then run `webpack` (to do this you must install <a target="_blank" href="http://webpack.github.io">webpack<a> globally!)
