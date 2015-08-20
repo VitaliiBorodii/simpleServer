@@ -13,7 +13,7 @@ function addMsg(message) {
     _messages.unshift(message);
 }
 
-var ShoeStore = _.merge(EventEmitter.prototype, {
+var Store = _.merge(EventEmitter.prototype, {
 
     getMsgs: function () {
         return _messages;
@@ -47,10 +47,10 @@ AppDispatcher.register(function (payload) {
             return true;
     }
 
-    ShoeStore.emitChange();
+    Store.emitChange();
 
     return true;
 
 });
 
-module.exports = ShoeStore;
+module.exports = Store;
