@@ -4,32 +4,27 @@ var async = require('async');
 module.exports = function (express) {
     var router = express.Router();
     router.get('/', function (req, res, next) {
-        res.render('login', {login: true});
+        res.render('login', {login: false});
     });
     router.post('/', function (req, res, next) {
         var email = req.body.email,
-            password = req.body.password;
+            password = req.body.password,
+            name = req.body.name;
         async.waterfall([
                 function (callback) {
                     User.findOne({email: email}, callback)
                 },
                 function (user, callback) {
                     if (user) {
-                        user.comparePassword(password, function (err, isMatch) {
-                            if (err) return next(err);
-                            if (isMatch) {
-                                callback(null, user);
-                            } else {
-                                callback({
-                                    status: 400,
-                                    message: 'Incorrect Password'
-                                });
-                            }
-                        });
-                    } else {
                         callback({
                             status: 400,
-                            message: 'No user with such Email'
+                            message: 'This Email is already in use'
+                        });
+                    } else {
+                        user = new User({email: email, hashedPassword: password, username: name});
+                        user.save(function (err) {
+                            if (err) return callback(err);
+                            callback(null, user);
                         });
                     }
                 }
