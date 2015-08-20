@@ -43,5 +43,5 @@ There are several pages available:
 '/chat',
   Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
 ###To build UI follow this steps:
-  1. go to ui folder, run `'npm install'` 
-  2. then run`'webpack'` (to do this you must install webpack globally!)
+  1. go to ui folder and run `npm install` 
+  2. then run `webpack` (to do this you must install ~webpack~ globally!)
