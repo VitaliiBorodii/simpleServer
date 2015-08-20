@@ -5,7 +5,7 @@ For data storage it uses MongoDB and mongoose driver.
 For generating HTML markup it uses doTjs templating library (there are also Jade templates, but they are deprecated).
 Server also uses socket.io as a library for more convenient work with websocket.
 ### To launch server follow this steps:
-  1. install Node.js and MongoDB
+  1. install <a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="http://docs.mongodb.org/manual/installation">MongoDB<a>
   2. run `npm install`
   3. create folder '/config' and put in it file main.json with content:
     `{
@@ -33,15 +33,15 @@ Server also uses socket.io as a library for more convenient work with websocket.
 ##Client side
 <b>There are several pages available:</b>
 #####/
-  <i>This is simple page that only have links to other pages and welcome text for logged users.</i>
+This is simple page that only have links to other pages and welcome text for logged users.
 ######/login
-  <i>Page for login  system.</i>
+Page for login  system.
 #####/signup
-  <i>Page for signing in system.</i>
+Page for signing in system.
 #####/mypage
-  <i>Page with todo list table written with the use of React.js. Todo list supports adding, editing and deleting items, it also has pagination.</i>
+Page with todo list table written with the use of React.js. Todo list supports adding, editing and deleting items, it also has pagination.
 #####/chat
-  <i>Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.</i>
+Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
 ###To build UI follow this steps:
   1. go to 'ui' folder and run `npm install` 
-  2. then run `webpack` (to do this you must install <a href="http://webpack.github.io/">webpack<a> globally!)
+  2. then run `webpack` (to do this you must install <a target="_blank" href="http://webpack.github.io">webpack<a> globally!)
