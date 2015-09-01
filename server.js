@@ -92,7 +92,7 @@ var dev = (app.get('env') === 'development');
       }
     });
   });
-
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 server.listen(port);
 console.log('http' + (https ? 's' : '') + ' \x1b[32mServer is running on \x1b[0m\x1b[35m' + port + '\x1b[0m port');
 module.exports = app;
