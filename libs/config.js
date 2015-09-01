@@ -1,7 +1,7 @@
 var nconf = require('nconf');
 nconf.argv()
     .env()
-    .file({file: './config/config.js'});
+    .file({file: './config/main.json'});
 nconf.defaults({
     session: {
         secret: "random Secret",
