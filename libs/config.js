@@ -14,7 +14,7 @@ nconf.defaults({
 });
 var env = process.env;
 if (!nconf.get('port')) {
-    nconf.set('port', /*env.OPENSHIFT_NODEJS_PORT ||*/ 1337)
+    nconf.set('port', env.OPENSHIFT_NODEJS_PORT || 8080)
 }
 if (!nconf.get('mongo')) {
     nconf.set('mongo', {
