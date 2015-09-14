@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm i; cd ui; npm i;  node_modules/webpack/bin/webpack.js; node ../server;"
+    "start": "npm i; node_modules/webpack/bin/webpack.js ui/webpack.config.js; node server;"
   },
   "main": "server.js",
   "dependencies": {
