@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        title Log In
+        link(rel='stylesheet', href='build/style.css')
+        link(rel='stylesheet', href='build/login.css')
+    body
+        .login-form
+            form(class='pure-form pure-form-aligned' method='POST', action='/login')
+                fieldset
+                    .pure-control-group
+                        label(for="name") UserName:
+                        input(id="name" name="name" type="text" placeholder="Username")
+                    .pure-control-group
+                        label(for="email") Email:
+                        input(id="email" name="email" type="email" placeholder="Email" required)
+                    .pure-control-group
+                        label(for="password") Password:
+                        input(id="password" name="password" type="password" placeholder="Password" required)
+                    .pure-controls
+                        label(for="remember" class="pure-checkbox")
+                            input(id="remember" name="remember" type="checkbox")
+                            span Remember me
+                    .pure-controls
+                        button(class="pure-button pure-button-primary") Submit

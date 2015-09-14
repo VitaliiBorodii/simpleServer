@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>[[= model.title]]</title>
+    <link rel="stylesheet", href="build/font-awesome.css">
+    <link rel="stylesheet", href="build/style.css">
+  </head>
+  <body>
+        <div class="page-header">
+            <ul>
+                <li><a class="pure-button pure-button-primary" href="/">Main</a></li>
+                [[? model.logged]]
+                    <li><a class="pure-button pure-button-primary" href="mypage">My Page</a></li>
+                    <li><a class="pure-button pure-button-primary" href="chat">Chat</a></li>
+                    <li>
+                    <form method='POST', action="logout">
+                        <button type="submit" class="pure-button pure-button-primary">Log Out</button>
+                    </form>
+                    </li>
+                    [[??]]
+                    <li><a class="pure-button pure-button-primary" href="login">Log In</a></li>
+                    <li><a class="pure-button pure-button-primary" href="signin">Sign In</a></li>
+                    [[?]]
+            </ul>
+        </div>
+    [[= layout.content ]]
+  </body>
+</html>

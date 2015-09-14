@@ -1,0 +1,27 @@
+body {
+    font-size: 16px;
+}
+
+fieldset {
+    text-align: center;
+}
+fieldset > label > input {
+    margin: 10px;
+}
+
+.login-form {
+    display: flex;
+    margin-top: 10%;
+}
+
+form {
+    margin: auto;
+}
+
+.pure-controls span {
+    padding-left: 10px;
+}
+
+.pure-controls button {
+    width: 100%
+}

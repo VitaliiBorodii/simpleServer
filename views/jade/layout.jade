@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='build/font-awesome.css')
+    link(rel='stylesheet', href='build/style.css')
+  body
+    .page-header
+      ul
+        li
+          a(class="pure-button pure-button-primary" href="/") Main
+        if logged == true
+          li
+            a(class="pure-button pure-button-primary" href="mypage") My Page
+          li
+            a(class="pure-button pure-button-primary" href="chat") Chat
+          li
+            form(method='POST', action="logout")
+              button( type="submit" class="pure-button pure-button-primary") Log Out
+        else
+          li
+            a(class="pure-button pure-button-primary" href="login") Log in
+    block content
