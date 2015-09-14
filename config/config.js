@@ -5,7 +5,7 @@ config = require('./main.json');
     console.log(err)
     var env = process.env;
     config = {
-        port : /*env.OPENSHIFT_NODEJS_PORT ||*/ 1337,
+        port : env.OPENSHIFT_NODEJS_PORT,
         session: {
             secret: "sercer",
             key: "user",
