@@ -2,7 +2,7 @@
 ##Server side
 This is server written on Node.js, it can be launched both in http or https instances.
 For data storage it uses MongoDB and mongoose driver.
-For generating HTML markup it uses doTjs templating library (there are also Jade templates, but they are deprecated).
+For generating HTML markup it uses doT.js templating library (there are also Jade templates, but they are deprecated).
 Server also uses socket.io as a library for more convenient work with websocket.
 ### To launch server follow this steps:
   1. install <a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="http://docs.mongodb.org/manual">MongoDB<a>
