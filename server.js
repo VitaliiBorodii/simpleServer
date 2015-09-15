@@ -72,7 +72,7 @@ var dev = (app.get('env') === 'development');
         res.send(err.message);
       },
       html: function () {
-          err.stack = dev ? '' : err.stack || '';
+          err.stack = dev ? err.stack : '';
         res.render('error', {
           title: 'Error',
           logged: !!req.session.userId,
