@@ -1,6 +1,5 @@
 .idea
 *.iml
-.openshift
 node_modules
 bower_components
 build
