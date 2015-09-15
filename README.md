@@ -7,18 +7,18 @@ Server also uses socket.io as a library for more convenient work with websocket.
 ### To launch server follow this steps:
   1. install <a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="http://docs.mongodb.org/manual">MongoDB<a>
   2. create folder '/config' and put in it file main.json with content:
-    `{
-      "server" : {
-        "port" : {port int},
-        "ip": {ip string}
-      },
-    "mongo": {
-      "uri": {uri_to_connect_mongodb}
-    },
-    "https": { //optinal
-      "cert": {path to certificate file string},
-      "key": {path to key file string}
-    }
+    `{<br>
+      "server" : {<br>
+        "port" : {port int},<br>
+        "ip": {ip string}<br>
+      },<br>
+    "mongo": {<br>
+      "uri": {uri_to_connect_mongodb}<br>
+    },<br>
+    "https": { //optinal<br>
+      "cert": {path to certificate file string},<br>
+      "key": {path to key file string}<br>
+    }<br>
   }`
   3. Run `npm start` to run server (To run https server, you need to put ssl key and certificate files, into '/config' directory and add links to them in main.json).
 
