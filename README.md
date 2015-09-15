@@ -29,7 +29,7 @@ Server also uses socket.io as a library for more convenient work with websocket.
     </br>4.1 `node server` or `node server --https=false` will run http server
     </br>4.2 `node server -https=true` or `node server --https=true` will run https server, but to do that you need to put 'server.key' and 'server.crt', ssl key and certificate files respectively, into '/config' directory.
 
-Then application will print to console which server is running, go to {http|| https}://localhost:1337/ to see the result.
+Then application will print to console which server is running, go to {http|| https}://localhost:{port}/ to see the result.
 
 ##Client side
 <b>There are several pages available:</b>
