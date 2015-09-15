@@ -13,15 +13,15 @@ nconf.defaults({
     }
 });
 var env = process.env;
-if (!nconf.get('port')) {
-    nconf.set('port', env.OPENSHIFT_NODEJS_PORT || 8080)
+if (!nconf.get('server')) {
+    nconf.set('server', {
+        port : env.OPENSHIFT_NODEJS_PORT || env.PORT || 3002,
+        ip: env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
+    });
 }
 if (!nconf.get('mongo')) {
     nconf.set('mongo', {
-        host: env.OPENSHIFT_MONGODB_DB_HOST,
-        user: env.OPENSHIFT_MONGODB_DB_USERNAME,
-        port: env.OPENSHIFT_MONGODB_DB_PORT,
-        uri: env.OPENSHIFT_MONGODB_DB_URL
+        uri: env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/dev'
     });
 }
 module.exports = nconf;
