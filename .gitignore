@@ -4,5 +4,3 @@ node_modules
 bower_components
 build
 config/**
-
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/vitalii/simpleServer/config/server.key -out /home/vitalii/simpleServer/config/server.crt
