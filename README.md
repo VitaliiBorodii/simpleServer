@@ -9,19 +9,11 @@ Server also uses socket.io as a library for more convenient work with websocket.
   2. run `npm install`
   3. create folder '/config' and put in it file main.json with content:
     `{
-      "port" : {port int},
-      "session": {
-        "secret": {your_secret string},
-        "key": {your_key string},
-        "cookie": {
-          "maxAge": {cookie_age milliseconds},
-          "httpOnly": true
-        }
+      "server" : {
+        "port" : {port int},
+        "ip": {ip string}
       },
     "mongo": {
-      "host": "localhost",
-      "db": {db_name},
-      "port": {mongo_db_port |default 27017},
       "uri": {uri_to_connect_mongodb}
     }
   }`
