@@ -29,12 +29,10 @@ var serverCore = require(protocol),
 if (!https) {
     server = serverCore.createServer(app);
 } else {
-    var credentials = {
+    server = serverCore.createServer({
         key: fs.readFileSync('./config/' + https.key, 'utf8'),
         cert: fs.readFileSync('./config/' + https.cert, 'utf8')
-    };
-
-    server = serverCore.createServer(credentials, app);
+    }, app);
 }
 
 
@@ -65,7 +63,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-var dev = (app.get('env') === 'development');
 //error handler
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -78,7 +75,7 @@ var dev = (app.get('env') === 'development');
           title: 'Error',
           logged: !!req.session.userId,
           message: err.message,
-          error: dev ? err : {}
+          error: err
         });
       },
       json: function () {
