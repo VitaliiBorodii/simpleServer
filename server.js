@@ -95,7 +95,7 @@ var dev = (app.get('env') === 'development');
       }
     });
   });
-server.listen(port ,ip, function () {
+server.listen(port, ip, function () {
     console.log("✔ Server listening at %s:%d ", ip, port);
 });
-module.exports = app;process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002
+module.exports = app;
