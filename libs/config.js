@@ -15,7 +15,7 @@ nconf.defaults({
 var env = process.env;
 if (!nconf.get('server')) {
     nconf.set('server', {
-        port : env.OPENSHIFT_NODEJS_PORT || env.PORT || 3002,
+        port : env.OPENSHIFT_NODEJS_PORT || env.PORT || 1337,
         ip: env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
     });
 }
