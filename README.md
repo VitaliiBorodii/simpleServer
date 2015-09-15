@@ -16,10 +16,10 @@ Server also uses socket.io as a library for more convenient work with websocket.
       "uri": {uri_to_connect_mongodb}
     }
   }`
-  3. Run `npm start` to run server (<i>To run https server, you need to put ssl key and certificate files, into '/config' directory and add links to them in main.json as followed:</i> `"https": {
+  3. Run `npm start` to run server.<p>(<i>To run https server, you need to put ssl key and certificate files, into '/config' directory and add links to them in main.json as followed:</i> `"https": {
       "cert": {path to certificate file string},
       "key": {path to key file string}
-    }`).
+    }`)</p>
 
 ##Client side
 <b>There are several pages available:</b>
