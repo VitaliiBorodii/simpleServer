@@ -22,25 +22,16 @@ app.set('port', port);
 app.set('ip', ip);
 
 // decide to launch http or https server
-var https;
-var args = process.argv,
-    len = args.length;
-for (var i = 0; i < len; i++) {
-    if (/https=true/.test(args[i])) {
-        https = true;
-        break;
-    } else if (/https=false/.test(args[i])) {
-        https = false;
-    }
-}
-var serverCore = require(https ? 'https' : 'http'),
+var https = config.get('https');
+var protocol = https ? 'https' : 'http';
+var serverCore = require(protocol),
     server;
 if (!https) {
     server = serverCore.createServer(app);
 } else {
     var credentials = {
-        key: fs.readFileSync('./config/server.key', 'utf8'),
-        cert: fs.readFileSync('./config/server.crt', 'utf8')
+        key: fs.readFileSync('./config/' + https.key, 'utf8'),
+        cert: fs.readFileSync('./config/' + https.cert, 'utf8')
     };
 
     server = serverCore.createServer(credentials, app);
@@ -96,7 +87,6 @@ var dev = (app.get('env') === 'development');
     });
   });
 server.listen(port, ip, function () {
-    console.log("✔ Server listening at %s:%d ", ip, port);
+    console.log("✔ Server listening at %s://%s:%d ", protocol, ip, port);
 });
 module.exports = app;
-process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002
