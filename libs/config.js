@@ -1,4 +1,5 @@
 var nconf = require('nconf');
+var env = process.env;
 nconf.argv()
     .env()
     .file({file: './config/main.json'});
@@ -12,7 +13,6 @@ nconf.defaults({
         }
     }
 });
-var env = process.env;
 if (!nconf.get('server')) {
     nconf.set('server', {
         port : env.OPENSHIFT_NODEJS_PORT || env.PORT || 1337,
