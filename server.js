@@ -63,6 +63,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+var dev = (app.get('env') === 'development');
 //error handler
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -71,6 +72,7 @@ app.use(function(req, res, next) {
         res.send(err.message);
       },
       html: function () {
+          err.stack = dev ? '' : err.stack || '';
         res.render('error', {
           title: 'Error',
           logged: !!req.session.userId,
