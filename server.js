@@ -15,8 +15,8 @@ var io = require('socket.io');
 var app = express();
 var session = require('./libs/session')(config);
 var routes = require('./routes');
-var port = config.get('port');
-var ip = config.get('ip');
+var port = config.get('server:port');
+var ip = config.get('server:ip');
 
 app.set('port', port);
 app.set('ip', ip);
