@@ -6,8 +6,7 @@ For generating HTML markup it uses doTjs templating library (there are also Jade
 Server also uses socket.io as a library for more convenient work with websocket.
 ### To launch server follow this steps:
   1. install <a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="http://docs.mongodb.org/manual">MongoDB<a>
-  2. run `npm install`
-  3. create folder '/config' and put in it file main.json with content:
+  2. create folder '/config' and put in it file main.json with content:
     `{
       "server" : {
         "port" : {port int},
@@ -15,14 +14,14 @@ Server also uses socket.io as a library for more convenient work with websocket.
       },
     "mongo": {
       "uri": {uri_to_connect_mongodb}
+    },
+    "https": {
+      "cert": {path to certificate file string},
+      "key": {path to key file string}
     }
   }`
-  4. Run 'node server':
-    </br>4.1 `node server` or `node server --https=false` will run http server
-    </br>4.2 `node server -https=true` or `node server --https=true` will run https server, but to do that you need to put 'server.key' and 'server.crt', ssl key and certificate files respectively, into '/config' directory.
-
-Then application will print to console which server is running, go to {http|| https}://localhost:{port}/ to see the result.
-
+  3. Run 'npm start' to start server (To run https server, you need to put ssl key and certificate files, into '/config' directory and add them to main.json).
+  4. 
 ##Client side
 <b>There are several pages available:</b>
 #####/
@@ -35,6 +34,3 @@ Page for signing in system.
 Page with todo list table written with the use of React.js. Todo list supports adding, editing and deleting items, it also has pagination.
 #####/chat
 Primitive chat that uses websocket technology to communicate between chat members. Chat also uses a React with flux pattern.
-###To build UI follow this steps:
-  1. go to '/ui' folder and run `npm install` 
-  2. then run `webpack` (to do this you must install <a target="_blank" href="http://webpack.github.io">webpack<a> globally!)
