@@ -1,4 +1,4 @@
-#Simple Node.js server
+#Simple Node.js server(<a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="https://ss-thx1138.rhcloud.com">Demo<a>)
 ##Server side
 This is server written on Node.js, it can be launched both in http or https instances.
 For data storage it uses MongoDB and mongoose driver.
