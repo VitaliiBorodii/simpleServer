@@ -16,7 +16,10 @@ var app = express();
 var session = require('./libs/session')(config);
 var routes = require('./routes');
 var port = config.get('port');
+var ip = config.get('ip');
 
+app.set('port', port);
+app.set('ip', ip);
 
 // decide to launch http or https server
 var https;
@@ -92,7 +95,8 @@ var dev = (app.get('env') === 'development');
       }
     });
   });
-app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
-server.listen(port);
-console.log('http' + (https ? 's' : '') + ' \x1b[32mServer is running on \x1b[0m\x1b[35m' + port + '\x1b[0m port');
+server.listen(port, ip, function () {
+    console.log("✔ Server listening at %s:%d ", ip, port);
+});
 module.exports = app;
+process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002
