@@ -5,8 +5,8 @@ config = require('./main.json');
     console.log(err)
     var env = process.env;
     config = {
-        port : process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002,
-        ip: process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
+        port : env.OPENSHIFT_NODEJS_PORT || env.PORT || 3002,
+        ip: env.OPENSHIFT_NODEJS_IP || "127.0.0.1",
         session: {
             secret: "sercer",
             key: "user",
@@ -23,5 +23,4 @@ config = require('./main.json');
         }
     }
 }
-console.log(config);
 module.exports = config;
