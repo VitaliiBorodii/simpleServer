@@ -7,9 +7,9 @@ Server also uses socket.io as a library for more convenient work with websocket.
 ### To launch server follow this steps:
   1. install <a target="_blank" href="https://nodejs.org">Node.js<a> and <a target="_blank" href="http://docs.mongodb.org/manual">MongoDB<a>
   2. create folder '/config' and put in it file main.json with content:
-    `{<br>
-      "server" : {<br>
-        "port" : {port int},<br>
+    `{</br>
+      "server" : {</br>
+        "port" : {port int},<br/>
         "ip": {ip string}<br>
       },<br>
     "mongo": {<br>
