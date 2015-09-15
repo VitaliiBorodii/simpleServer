@@ -21,7 +21,6 @@ Server also uses socket.io as a library for more convenient work with websocket.
     }
   }`
   3. Run 'npm start' to start server (To run https server, you need to put ssl key and certificate files, into '/config' directory and add them to main.json).
-  4. 
 ##Client side
 <b>There are several pages available:</b>
 #####/
