@@ -5,7 +5,6 @@ var actions = require('./factories/messagesStoreActions');
 var io = require('socket.io-client');
 require('./css/chat.css');
 window.onload = function () {
-console.log('fixed ui building')
     var events = {
         connected: 'Your connection ID is: %id%',
         join: 'Joined %name%',
@@ -97,5 +96,4 @@ console.log('fixed ui building')
                 return true
         }
     });
-};
 };
