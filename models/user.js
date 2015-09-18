@@ -2,7 +2,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
-
+var prod = process.env.NODE_ENV === "production";
 var Schema = new mongoose.Schema({
     username: {
         type: String
@@ -25,6 +25,9 @@ var Schema = new mongoose.Schema({
     }
 });
 
+if (prod) {
+    Schema.set('autoIndex', false);
+}
 
 Schema.pre('save', function(next) {
     var user = this;
