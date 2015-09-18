@@ -1,22 +1,20 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var buildDir = '../public/build';
-var webpack = require("webpack");
-var production = process.env.NODE_ENV === 'production';
-var plugins = [new ExtractTextPlugin("[name].css", {
-    allChunks: true
-})];
-var prod = process.env.NODE_ENV === "production";
-if (prod) {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}))
-}
+var entriesDir = './webpack-entrypoints/';
+var _ = require('lodash');
+var argv = require('optimist').argv;
+var entry = argv.entryPoint || (function () {
+        var fs = require('fs');
+        return fs.readdirSync(entriesDir).join();
+    })();
+var entries = entry.split(',');
+var entryPoints = {};
+_.forEach(entries, function (point) {
+    _.merge(entryPoints, require(entriesDir + point))
+});
+console.log(entryPoints)
 module.exports = {
-    entry: {
-        chat: './chat.jsx',
-        'font-awesome': 'font-awesome-webpack!./less/font-awesome.config.js',
-        style: './css/style.css',
-        login: './login.js',
-        mypage: './todo.jsx'
-    },
+    entry: entryPoints,
     output: {
         path: buildDir,
         filename: '[name].js'
@@ -38,5 +36,9 @@ module.exports = {
         modulesDirectories: ['node_modules'],
         extensions: ['', '.js', '.jsx']
     },
-    plugins: plugins
+    plugins: [
+        new ExtractTextPlugin("[name].css", {
+            allChunks: true
+        })
+    ]
 };
