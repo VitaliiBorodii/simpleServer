@@ -69,7 +69,7 @@ module.exports = React.createClass({
                                key={message._id}/>);
         }.bind(this));
         if (newMsg) {
-            this.props.scrolling = false
+            this.setProps({'scrolling': false});
         }
         return (
             <div className="chatWrapper">

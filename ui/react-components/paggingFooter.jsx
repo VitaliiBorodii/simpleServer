@@ -1,6 +1,9 @@
 'use strict'
 var React = require('react');
 module.exports = React.createClass({
+    getDefaultProps: function () {
+        return {};
+    },
     changePage: function (e) {
         var el = e.target,
             limit = el.value;

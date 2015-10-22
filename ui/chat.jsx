@@ -1,5 +1,6 @@
 'use strict'
 var React = require('react');
+var ReactDom = require('react-dom');
 var ChatTable = require('./react-components/chatTable.jsx');
 var actions = require('./factories/messagesStoreActions');
 var io = require('socket.io-client');
@@ -76,7 +77,7 @@ window.onload = function () {
         console.log(msg);
         switch (type) {
             case 'connected':
-                React.render(<ChatTable typing={typing} user={data.user} load={load}
+                ReactDom.render(<ChatTable typing={typing} user={data.user} load={load}
                                         add={add}/>, document.getElementById('chat-content'));
                 load();
                 break;

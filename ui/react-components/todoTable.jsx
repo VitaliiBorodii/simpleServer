@@ -13,14 +13,14 @@ module.exports = React.createClass({
         }
     },
     setLimit: function (limit) {
-        this.props.limit = limit;
-        this.props.page = 1;
+        this.setProps({'limit': limit});
+        this.setProps({'page': 1});
         this.fetchData();
     },
     setPage: function (val) {
-        var nexPage = this.props.page + val;
+        var nexPage = this.setProps({page: this.props.page + val});
         nexPage = (nexPage > 0) ? nexPage : 1;
-        this.props.page = nexPage;
+        this.setProps({'page': nexPage});
         this.fetchData();
     },
     getInitialState: function () {
@@ -40,11 +40,11 @@ module.exports = React.createClass({
                 try {
                     data = JSON.parse(xhr.responseText);
                 } catch (err) {
-                    data = [];
+                    data = {};
                     console.error(err)
                 }
                 if (data.page) {
-                    this.props.total = data.page.total;
+                    this.setProps({total: data.page.total});
                 }
                 this.setState({
                     items: data.content
