@@ -1,5 +1,6 @@
 'use strict'
 var React = require('react');
+var ReactDom = require('react-dom');
 var _ = require('lodash');
 var InputRow = require('./chatInput');
 var ChatRow = require('./chatRow');
@@ -15,10 +16,9 @@ module.exports = React.createClass({
     getInitialState: function () {
         return getAppState();
     },
-    getDefaultProps: function () {
-        return {
-            scrolling: false
-        }
+    scroll: {
+        previousLimit: 0,
+        scrolling: false
     },
     componentDidMount: function () {
         Store.addChangeListener(this._onChange);
@@ -31,15 +31,13 @@ module.exports = React.createClass({
 
         if (el.scrollTop === 0) {
             var limit = this.state.messages.length + 15;
-            if (this.props.previousLimit >= limit) return
+            if (this.scroll.previousLimit >= limit) return
             this.props.load({
                 limit: limit
             });
-            this.props.previousLimit = limit;
+            this.scroll.previousLimit = limit;
             el.scrollTop = 10;
-            this.setProps({
-                scrolling: true
-            })
+            this.scroll.scrolling = true;
         }
     },
     editMessage: function (id, message) {
@@ -49,8 +47,8 @@ module.exports = React.createClass({
         debugger
     },
     componentDidUpdate: function (e) {
-        if (!this.props.scrolling) {
-            var el = this.getDOMNode().childNodes[0];
+        if (!this.scroll.scrolling) {
+            var el = ReactDom.findDOMNode(this).childNodes[0];
             el.scrollTop = el.scrollHeight;
         }
     },
@@ -69,7 +67,7 @@ module.exports = React.createClass({
                                key={message._id}/>);
         }.bind(this));
         if (newMsg) {
-            this.setProps({'scrolling': false});
+            this.scroll.scrolling = false;
         }
         return (
             <div className="chatWrapper">

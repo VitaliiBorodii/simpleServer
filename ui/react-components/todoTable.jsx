@@ -5,22 +5,20 @@ var ItemRow = require('./itemRow');
 var InputRow = require('./inputRow');
 var Footer = require('./paggingFooter');
 module.exports = React.createClass({
-    getDefaultProps: function () {
-        return {
-            limit: 10,
-            page: 1,
-            total: Infinity
-        }
+    page: {
+        limit: 10,
+        page: 1,
+        total: Infinity
     },
     setLimit: function (limit) {
-        this.setProps({'limit': limit});
-        this.setProps({'page': 1});
+        this.page.limit = limit;
+        this.page.page = 1;
         this.fetchData();
     },
     setPage: function (val) {
-        var nexPage = this.setProps({page: this.props.page + val});
+        var nexPage = this.page.page + val;
         nexPage = (nexPage > 0) ? nexPage : 1;
-        this.setProps({'page': nexPage});
+        this.page.page = nexPage;
         this.fetchData();
     },
     getInitialState: function () {
@@ -29,8 +27,8 @@ module.exports = React.createClass({
         };
     },
     fetchData: function () {
-        var page = this.props.page,
-            limit = this.props.limit;
+        var page = this.page.page,
+            limit = this.page.limit;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/todos?page=' + page + '&limit=' + limit, true);
         xhr.setRequestHeader('Content-type', 'application/json');
@@ -44,7 +42,7 @@ module.exports = React.createClass({
                     console.error(err)
                 }
                 if (data.page) {
-                    this.setProps({total: data.page.total});
+                    this.page.total = data.page.total;
                 }
                 this.setState({
                     items: data.content
@@ -117,14 +115,13 @@ module.exports = React.createClass({
                 </thead>
                 <tbody>
                 <tr>
-                    <td><input onClick={this.selectAll} className="pure-checkbox" type="checkbox"/></td>
                     <td>Item Name</td>
                     <td>Status</td>
                     <td>Delete</td>
                 </tr>
                 {rows}
-                <Footer allTotal={this.props.total} setPage={this.setPage} setLimit={this.setLimit}
-                        currLimit={this.props.limit} currPage={this.props.page} totalLength={length}/>
+                <Footer allTotal={this.page.total} setPage={this.setPage} setLimit={this.setLimit}
+                        currLimit={this.page.limit} currPage={this.page.page} totalLength={length}/>
                 </tbody>
             </table>
         );

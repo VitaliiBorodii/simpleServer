@@ -27,7 +27,6 @@ module.exports = React.createClass({
         }
 
         return (<tr className={className}>
-            <td><input id="remember" className="pure-checkbox" type="checkbox" defaultChecked={check}/></td>
             <td>{name}</td>
             <td onClick={this.makeDone}><span><i className={iconCls}></i></span></td>
             <td onClick={this.deleteItem}><span><i className="fa fa-lg fa-times"></i></span></td>

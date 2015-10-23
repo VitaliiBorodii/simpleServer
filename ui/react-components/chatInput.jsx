@@ -10,7 +10,7 @@ module.exports = React.createClass({
     },
     addItem: function (e, id) {
         e.preventDefault();
-        var input = this.getDOMNode().getElementsByTagName('textarea')[0];
+        var input = e.target;
         var itemName = input.value.trim();
         if (itemName) {
             this.props.handleSend(itemName);

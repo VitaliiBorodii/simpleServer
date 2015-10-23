@@ -41,7 +41,7 @@ module.exports = React.createClass({
             nextCls = ' disabled';
         }
         return (<tr className="todoFooter">
-            <td colSpan="4">
+            <td colSpan="3">
                 <select defaultValue={limit} onChange={this.changePage}>
                     <option value='10'>10</option>
                     <option value='25'>25</option>
