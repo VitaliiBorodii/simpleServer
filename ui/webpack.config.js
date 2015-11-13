@@ -12,6 +12,7 @@ if (prod) {
 module.exports = {
     entry: {
         chat: './chat.jsx',
+        'video-chat': './video-chat.jsx',
         'font-awesome': 'font-awesome-webpack!./less/font-awesome.config.js',
         style: './css/style.css',
         login: './login.js',
