@@ -21,7 +21,7 @@ if (!nconf.get('server')) {
 }
 if (!nconf.get('mongo')) {
     nconf.set('mongo', {
-        uri: env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/dev'
+        uri: env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://127.0.0.1/dev'
     });
 }
 module.exports = nconf;

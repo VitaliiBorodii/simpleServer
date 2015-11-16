@@ -24,6 +24,7 @@
     "morgan": "*",
     "nconf": "~0.6.9",
     "optimist": "^0.6.1",
+    "peer": "^0.2.8",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.3.6"
   }

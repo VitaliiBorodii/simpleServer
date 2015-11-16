@@ -7,6 +7,7 @@ var signin = require('./signin')(express);
 var login = require('./login')(express);
 var logout = require('./logout')(express);
 var chat = require('./chat')(express);
+var videoChat = require('./video-chat')(express);
 var todos = require('./todos')(express);
 var mypage = require('./mypage')(express);
 var messages = require('./messages')(express);
@@ -24,6 +25,7 @@ module.exports = function (app) {
     app.use('/logout', logout);
 
     app.use('/chat', chat);
+    app.use('/video-chat', videoChat);
 
     app.use('/messages', messages);
 

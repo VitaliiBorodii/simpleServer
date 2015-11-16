@@ -51,4 +51,5 @@ module.exports = function (socket, session) {
         autoSave: true
     }));
     socket.on('connection', chatConnect);
+    return socket;
 };

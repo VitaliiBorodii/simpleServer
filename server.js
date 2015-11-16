@@ -35,11 +35,14 @@ if (!https) {
     }, app);
 }
 
-
 //websocket
 var websocket = require('./libs/websocket');
 var socket = io.listen(server);
-websocket(socket, session);
+var ws = websocket(socket, session);
+
+//WEB-RTC
+var webRTC = require('./libs/webRTC')(app, server, socket);
+
 // view engine setup
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, 'views', tempEngine));
