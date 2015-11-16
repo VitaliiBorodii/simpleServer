@@ -25,7 +25,7 @@ module.exports = function (app) {
     app.use('/logout', logout);
 
     app.use('/chat', chat);
-    app.use('/video-chat', videoChat);
+    //app.use('/video-chat', videoChat);
 
     app.use('/messages', messages);
 

@@ -1,0 +1,12 @@
+---
+layout: layout.dot
+title: [[= model.title]]
+---
+
+[[##content:
+   <link rel="stylesheet" href='build/video-chat.css'>
+   <div id="video-container">
+   	<video id="video-chat"></video>
+   </div>
+   <script src="build/video-chat.js"></script>
+#]]
